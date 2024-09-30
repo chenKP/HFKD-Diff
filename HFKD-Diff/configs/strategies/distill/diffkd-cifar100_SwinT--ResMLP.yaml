@@ -1,0 +1,66 @@
+dataset: cifar100
+num_classes: 100
+device: "3"
+teacher_ckpt: /home/user1/kd/classification/teachers/swin_tiny_patch4_window7_224_cifar100.pth
+
+aa: rand-m9-mstd0.5-inc1
+
+mixup: 0.8
+color_jitter: 0.0
+
+student_is_cnn: false
+cross_head: 4
+
+assist_kd: kd
+#mlkd
+mlkd_ce: 1
+mlkd_kd: 1
+
+#dkd
+dkd_alpha: 1
+dkd_beta: 8
+
+#dist
+dist_beta: 1
+dist_gamma: 1
+
+reprob: 0.25
+batch_size: 64
+schedule: [150,180,210]
+cutout_length: 0
+decay_by_epoch: True
+decay_epochs: 100
+decay_rate: 0.1
+drop: 0.0
+epochs: 300
+log_interval: 50
+lr: 0.0005
+smoothing: 0.1
+min_lr: 1.0e-06
+model_ema: True
+model_ema_decay: 0.99996
+momentum: 0.9
+opt: adamw
+opt_betas: [0.9, 0.999]
+opt_eps: 1.0e-08
+remode: pixel
+sched: cosine
+seed: 42
+warmup_epochs: 0
+warmup_lr: 5.0e-7
+weight_decay: 0.05
+workers: 4
+sgd_no_nesterov: True
+opt_no_filter: True
+experiment: SwinT--ResMLP
+# kd
+ori_loss_weight:  1.
+kd_loss_weight: 1.
+kd: diffkd
+teacher_model: timm_swin_tiny_patch4_window7_224
+model: timm_resmlp_12_224
+teacher_pretrained: False
+kd_loss_kwargs:
+  use_ae: True
+  ae_channels: 1024
+  tau: 1

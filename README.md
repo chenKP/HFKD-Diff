@@ -9,6 +9,7 @@
 - timm  (0.6.4)
 
 ## Training
+We use the ```.ymal``` file as the configuration file, where the specific hyperparameter configuration information is available.At training time, use the ```config``` parameter to specify the path to the ymal file.
 Run ```train.py``` with student network as ResNet18 and teacher as Swin-T  to reproduce experiment result on CIFAR100.
 ```
 python train.py --config ./config/diffkd-cifar100_SwinT--resnet18.ymal
